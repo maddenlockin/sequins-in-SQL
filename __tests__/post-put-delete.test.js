@@ -71,13 +71,13 @@ describe('post put and delete routes', () => {
             return client.end(done);
         });
 
-        test('/POST specialties returns all specialties', async () => {
+        test('/PUT specialties returns all specialties', async () => {
 
             const data = await fakeRequest(app)
-                .post('/specialties')
+                .put('/specialties/5')
                 .send({
-                    type: 'new specialty',
-                    focus: 'new focus',
+                    type: 'updated specialty',
+                    focus: 'updated focus',
                     difficulty: 2
                 })
                 .expect('Content-Type', /json/)
