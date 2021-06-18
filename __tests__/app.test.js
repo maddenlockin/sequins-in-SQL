@@ -85,13 +85,13 @@ describe('app routes', () => {
 
     test('/GET specialties/3 returns one specialty', async() => {
 
-      const expectation = {
+      const expectation = [{
         type: 'neurology',
         focus: 'brain',
         difficulty: 7,
         id: 3,
         owner_id: 1
-      };
+      }];
 
       const data = await fakeRequest(app)
         .get('/specialties/3')
