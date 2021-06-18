@@ -6,6 +6,46 @@ const fakeRequest = require('supertest');
 const app = require('../lib/app');
 const client = require('../lib/client');
 
+const specialties = [
+  {
+    type: 'cardiology',
+    focus: 'heart',
+    difficulty: 8,
+    id: 1,
+    owner_id: 1
+  },
+  {
+    type: 'endocrinology',
+    focus: 'endocrine system',
+    difficulty: 6,
+    id: 2,
+    owner_id: 1
+  },
+  {
+    type: 'neurology',
+    focus: 'brain',
+    difficulty: 7,
+    id: 3,
+    owner_id: 1
+  },
+  {
+    type: 'psychology',
+    focus: 'mental health',
+    difficulty: 8,
+    id: 4,
+    owner_id: 1
+  },
+  {
+    type: 'podiatry',
+    focus: 'feet',
+    difficulty: 5,
+    id: 5,
+    owner_id: 1
+  }
+];
+
+
+
 describe('app routes', () => {
   describe('routes', () => {
     let token;
@@ -31,31 +71,30 @@ describe('app routes', () => {
       return client.end(done);
     });
 
-    test('returns animals', async() => {
+    test('/GET specialties returns all specialties', async() => {
 
-      const expectation = [
-        {
-          'id': 1,
-          'name': 'bessie',
-          'coolfactor': 3,
-          'owner_id': 1
-        },
-        {
-          'id': 2,
-          'name': 'jumpy',
-          'coolfactor': 4,
-          'owner_id': 1
-        },
-        {
-          'id': 3,
-          'name': 'spot',
-          'coolfactor': 10,
-          'owner_id': 1
-        }
-      ];
+      const expectation = specialties;
 
       const data = await fakeRequest(app)
-        .get('/animals')
+        .get('/specialties')
+        .expect('Content-Type', /json/)
+        .expect(200);
+
+      expect(data.body).toEqual(expectation);
+    });
+
+    test('/GET specialties/3 returns one specialty', async() => {
+
+      const expectation = {
+        type: 'neurology',
+        focus: 'brain',
+        difficulty: 7,
+        id: 3,
+        owner_id: 1
+      };
+
+      const data = await fakeRequest(app)
+        .get('/specialties/3')
         .expect('Content-Type', /json/)
         .expect(200);
 
