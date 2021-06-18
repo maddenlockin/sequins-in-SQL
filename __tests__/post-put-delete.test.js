@@ -71,15 +71,10 @@ describe('post put and delete routes', () => {
             return client.end(done);
         });
 
-        test('/PUT specialties returns all specialties', async () => {
+        test('/DELETE specialties deletes one', async () => {
 
-            const data = await fakeRequest(app)
-                .put('/specialties/5')
-                .send({
-                    type: 'updated specialty',
-                    focus: 'updated focus',
-                    difficulty: 2
-                })
+            await fakeRequest(app)
+                .delete('/specialties/5')
                 .expect('Content-Type', /json/)
                 .expect(200);
 
@@ -95,8 +90,8 @@ describe('post put and delete routes', () => {
                 'owner_id': 1,
                 'type': 'new specialty'
             };
-            expect(data.body).toEqual(newSpecialty);
-            expect(dataSpecialties.body).toContainEqual(newSpecialty);
+
+            expect(dataSpecialties.body).not.toContainEqual(newSpecialty);
         });
     });
 });
