@@ -38,3 +38,6 @@ async function run() {
   }
 
 }
+// Add new table definition here 
+
+// Connect the new table to the old table in

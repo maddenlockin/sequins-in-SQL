@@ -23,3 +23,5 @@ async function run() {
   }
     
 }
+
+// drop new table here
