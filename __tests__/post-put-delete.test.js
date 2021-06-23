@@ -10,35 +10,35 @@ const specialties = [
     {
         type: 'cardiology',
         focus: 'heart',
-        difficulty: 8,
+        category: 3,
         id: 1,
         owner_id: 1
     },
     {
         type: 'endocrinology',
         focus: 'endocrine system',
-        difficulty: 6,
+        category: 1,
         id: 2,
         owner_id: 1
     },
     {
         type: 'neurology',
         focus: 'brain',
-        difficulty: 7,
+        category: 2,
         id: 3,
         owner_id: 1
     },
     {
         type: 'psychology',
         focus: 'mental health',
-        difficulty: 8,
+        category: 3,
         id: 4,
         owner_id: 1
     },
     {
         type: 'podiatry',
         focus: 'feet',
-        difficulty: 5,
+        category: 1,
         id: 5,
         owner_id: 1
     }
@@ -84,7 +84,7 @@ describe('post put and delete routes', () => {
                 .expect(200);
 
             const newSpecialty = {
-                'difficulty': 2,
+                'category': 2,
                 'focus': 'new focus',
                 'id': 6,
                 'owner_id': 1,

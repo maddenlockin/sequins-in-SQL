@@ -7,9 +7,10 @@ async function run() {
 
   try {
     await client.connect();
-    
+    // drop new table here
     await client.query(`
             DROP TABLE IF EXISTS users CASCADE;
+            DROP TABLE IF EXISTS categories CASCADE;
             DROP TABLE IF EXISTS specialties;
         `);
 
@@ -24,4 +25,3 @@ async function run() {
     
 }
 
-// drop new table here
