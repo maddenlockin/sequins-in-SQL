@@ -88,7 +88,7 @@ describe('app routes', () => {
       const expectation = [{
         type: 'neurology',
         focus: 'brain',
-        category: 'emergency',
+        category_id: 2,
         id: 3,
         owner_id: 1
       }];
@@ -101,14 +101,14 @@ describe('app routes', () => {
       expect(data.body).toEqual(expectation);
     });
 
-    test('/GET categories returns all categories', async() => {
+    // test('/GET categories returns all categories', async() => {
 
-      const data = await fakeRequest(app)
-        .get('/categories')
-        .expect('Content-Type', /json/)
-        .expect(200);
+    //   const data = await fakeRequest(app)
+    //     .get('/categories')
+    //     .expect('Content-Type', /json/)
+    //     .expect(200);
 
-      expect(data.body.length).toBeGreaterThan(0);
-    });
+    //   expect(data.body.length).toBeGreaterThan(0);
+    // });
   });
 });
