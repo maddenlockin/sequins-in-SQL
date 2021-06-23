@@ -10,35 +10,35 @@ const specialties = [
   {
     type: 'cardiology',
     focus: 'heart',
-    category: 3,
+    category_id: 3,
     id: 1,
     owner_id: 1
   },
   {
     type: 'endocrinology',
     focus: 'endocrine system',
-    category: 1,
+    category_id: 1,
     id: 2,
     owner_id: 1
   },
   {
     type: 'neurology',
     focus: 'brain',
-    category: 2,
+    category_id: 2,
     id: 3,
     owner_id: 1
   },
   {
     type: 'psychology',
     focus: 'mental health',
-    category: 3,
+    category_id: 3,
     id: 4,
     owner_id: 1
   },
   {
     type: 'podiatry',
     focus: 'feet',
-    category: 1,
+    category_id: 1,
     id: 5,
     owner_id: 1
   }
@@ -88,7 +88,7 @@ describe('app routes', () => {
       const expectation = [{
         type: 'neurology',
         focus: 'brain',
-        category: 7,
+        category: 'emergency',
         id: 3,
         owner_id: 1
       }];
@@ -99,6 +99,16 @@ describe('app routes', () => {
         .expect(200);
 
       expect(data.body).toEqual(expectation);
+    });
+
+    test('/GET categories returns all categories', async() => {
+
+      const data = await fakeRequest(app)
+        .get('/categories')
+        .expect('Content-Type', /json/)
+        .expect(200);
+
+      expect(data.body.length).toBeGreaterThan(0);
     });
   });
 });
