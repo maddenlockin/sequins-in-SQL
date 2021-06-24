@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 require('dotenv').config();
 
 const { execSync } = require('child_process');
@@ -10,35 +11,35 @@ const specialties = [
     {
         type: 'cardiology',
         focus: 'heart',
-        difficulty: 8,
+        category_id: 3,
         id: 1,
         owner_id: 1
     },
     {
         type: 'endocrinology',
         focus: 'endocrine system',
-        difficulty: 6,
+        category_id: 1,
         id: 2,
         owner_id: 1
     },
     {
         type: 'neurology',
         focus: 'brain',
-        difficulty: 7,
+        category_id: 2,
         id: 3,
         owner_id: 1
     },
     {
         type: 'psychology',
         focus: 'mental health',
-        difficulty: 8,
+        category_id: 3,
         id: 4,
         owner_id: 1
     },
     {
         type: 'podiatry',
         focus: 'feet',
-        difficulty: 5,
+        category_id: 1,
         id: 5,
         owner_id: 1
     }
@@ -84,7 +85,7 @@ describe('post put and delete routes', () => {
                 .expect(200);
 
             const newSpecialty = {
-                'difficulty': 2,
+                'category': 2,
                 'focus': 'new focus',
                 'id': 6,
                 'owner_id': 1,
@@ -92,6 +93,29 @@ describe('post put and delete routes', () => {
             };
 
             expect(dataSpecialties.body).not.toContainEqual(newSpecialty);
+        });
+
+        test('/POST creates one specialty', async () => {
+
+            const data = await fakeRequest(app)
+                .post('/specialties')
+                .send({
+                    type: 'new specialty',
+                    focus: 'some specialty',
+                    category_id: 1,
+                })
+
+                .expect('Content-Type', /json/)
+                .expect(200);
+
+            const newSpecialty = {
+                'type': 'new specialty',
+                'focus': 'some specialty',
+                'category_id': 1,
+                'id': 6,
+                'owner_id': 1
+            };
+            expect(data.body).toEqual(newSpecialty);
         });
     });
 });
